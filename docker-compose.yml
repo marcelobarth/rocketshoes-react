@@ -2,9 +2,15 @@ version: '3'
 
 services:
     app:
-        image: node:alpine
+        # ou use a imagem direto aqui, e adicione ("start-server": "json-server db.json --port 3333 --host 0.0.0.0"), dentro de scripts do package.json.
+        # image: node:alpine
+        # ou use a imagem do Dockefile
+        build: .
         ports:
             - 3000:3000
+            - 3333:3333
         volumes:
             - .:/usr/app/src
         tty: true
+        working_dir: /usr/app/src
+        command: json-server db.json --port 3333 --host 0.0.0.0
